@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Etiqueta.belongsToMany(models.Foto, {
         through: models.FotoEtiqueta,
-        foreignKey: 'etiqueta_id',
-        otherKey: 'foto_id',
+        foreignKey: 'etiqueta_id'
       });
     }
   }
