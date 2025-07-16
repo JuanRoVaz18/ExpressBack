@@ -4,7 +4,7 @@ var router = express.Router();
 const Sequelize = require('sequelize');
 const { Foto, Etiqueta } = require('../models');
 
-/* GET home page. */
+/* GET home page home*/
 router.get('/findAll/json', function(req, res, next) {
   Foto.findAll({
     attributes: { exclude: ['updatedAt'] },
