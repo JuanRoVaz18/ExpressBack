@@ -35,5 +35,27 @@ router.get('/findAll/view', function(req, res, next) {
   .catch(error => res.status(400).send(error));
 });
 
+router.get('/findById/json/:id', function(req, res, next) {
+  const id = req.params.id; 
+
+  Foto.findByPk(id, {
+    attributes: { exclude: ['updatedAt'] }, 
+    include: {
+      model: Etiqueta, 
+      attributes: ['id', 'texto'], 
+      through: { attributes: [] } 
+    }
+  })
+  .then(foto => {
+    if (!foto) {
+      return res.status(404).json({ message: 'Foto no encontrada' });
+    }
+    res.json(foto); 
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).json({ message: 'Ocurrió un error al obtener la foto', error }); 
+  });
+});
 
 module.exports = router;
